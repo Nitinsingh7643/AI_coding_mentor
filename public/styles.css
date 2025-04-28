@@ -250,6 +250,9 @@
   
   /* Output Section */
   .output-section {
+    overflow-x: hidden;
+    overflow-y: auto;
+    word-wrap: break-word;
     background: rgba(30, 42, 68, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 25px;
@@ -281,7 +284,42 @@
     border-radius: 15px;
     box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.3);
     font-size: 15px;
+    white-space: pre-wrap;          /* ✅ Allow text wrapping */
+    word-wrap: break-word;          /* ✅ Break long words */
+    overflow-x: auto;               /* ✅ Scroll horizontally if needed */
+    max-width: 100%;                /* ✅ Stay inside container */
   }
+  @media (max-width: 768px) {
+    .output-section pre {
+      font-size: 14px;
+      padding: 15px;
+    }
+  }
+  .copy-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .copy-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .output-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+  }
+  
+  
+  
   
   .light-mode .output-section pre {
     background: #f1f3f5;

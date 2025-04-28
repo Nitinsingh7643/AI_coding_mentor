@@ -23,7 +23,13 @@ app.set('views', path.join(__dirname, 'views'));
 
 const lngDetector = new LanguageDetect();
 
+// 🏠 Home Page
 app.get('/', (req, res) => {
+  res.render('home');
+});
+
+// 🚀 Launch App Page — this is the fix
+app.get('/app', (req, res) => {
   res.render('index', {
     code: '',
     suggestions: null,
@@ -33,6 +39,7 @@ app.get('/', (req, res) => {
   });
 });
 
+// 🔁 Form Submission
 app.post('/', async (req, res) => {
   const userCode = req.body.code.trim();
   const mode = req.body.mode || 'improve';
