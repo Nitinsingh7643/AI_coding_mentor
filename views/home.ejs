@@ -1076,6 +1076,82 @@
         gap: 0.5rem;
         align-items: center;
       }
+      .team-section {
+        background: linear-gradient(to right, #1e3c72, #2a5298);
+        color: #ffffff;
+        padding: 80px 20px;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      
+      .team-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .team-section h2 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #00ffe7;
+      }
+      
+      .team-section h2 span {
+        color: #ffffff;
+      }
+      
+      .team-intro {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #e0f7fa;
+      }
+      
+      .team-section-code {
+        font-size: 1rem;
+        color: #ffd54f;
+        margin-bottom: 40px;
+      }
+      
+      .team-members {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+      }
+      
+      .team-member {
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 30px 20px;
+        border-radius: 16px;
+        width: 250px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .team-member:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 30px rgba(0, 255, 255, 0.4);
+      }
+      
+      .team-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+      }
+      
+      .team-member h3 {
+        font-size: 1.4rem;
+        color: #00ffe7;
+        margin-bottom: 5px;
+      }
+      
+      .team-member p {
+        font-size: 1rem;
+        color: #e0e0e0;
+      }
+      
+      
+      
+      
     }
   </style>
 </head>
@@ -1380,7 +1456,32 @@
       </div>
     </div>
   </section>
-
+  <section class="team-section">
+    <div class="team-container">
+      <h2>🚀 Meet the Team Behind <span>AI Coding Mentor</span></h2>
+      <p class="team-intro">A passionate group of developers committed to enhancing coding education with AI.</p>
+      <p class="team-section-code">Section: <strong>K23SB</strong></p>
+  
+      <div class="team-members">
+        <div class="team-member">
+          <div class="team-icon">👨‍💻</div>
+          <h3>Nitin Kumar Singh</h3>
+          <p>ID: 12306258</p>
+        </div>
+        <div class="team-member">
+          <div class="team-icon">👨‍💻</div>
+          <h3>Akshat Paul</h3>
+          <p>ID: 12306541</p>
+        </div>
+        <div class="team-member">
+          <div class="team-icon">👨‍💻</div>
+          <h3>Sumehar Singh Grewal</h3>
+          <p>ID: 12303725</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <footer>
     <div class="footer-container">
       <div class="footer-about">
@@ -1396,6 +1497,7 @@
           <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
+  
       <div class="footer-links">
         <h4>Quick Links</h4>
         <ul>
@@ -1406,6 +1508,7 @@
           <li><a href="/blog"><i class="fas fa-chevron-right"></i> Blog</a></li>
         </ul>
       </div>
+  
       <div class="footer-links">
         <h4>Resources</h4>
         <ul>
@@ -1416,6 +1519,7 @@
           <li><a href="/changelog"><i class="fas fa-chevron-right"></i> Changelog</a></li>
         </ul>
       </div>
+  
       <div class="footer-newsletter">
         <h4>Newsletter</h4>
         <p>Subscribe to get updates on new features and coding tips.</p>
@@ -1425,9 +1529,9 @@
         </form>
         <p>We respect your privacy. Unsubscribe at any time.</p>
       </div>
-    </div>
+  
     <div class="footer-bottom">
-      <p class="footer-copyright">© 2023 AI Coding Mentor. All rights reserved.</p>
+      <p>© 2023 AI Coding Mentor. All rights reserved.</p>
       <div class="footer-legal">
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms of Service</a>
@@ -1435,7 +1539,7 @@
       </div>
     </div>
   </footer>
-
+  
   <script>
     // Intersection Observer for animations
     document.addEventListener('DOMContentLoaded', () => {
