@@ -1,88 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AI Coding Mentor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Coding Mentor - Premium</title>
+
+  <!-- Fonts: Inter for UI, Fira Code for Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap"
+    rel="stylesheet">
+
+  <!-- Highlight.js Theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+
+  <!-- Custom CSS -->
   <link href="/styles.css" rel="stylesheet" />
 </head>
+
 <body>
-  <div class="container">
-    <header class="hero-section">
-      <button class="toggle-dark-mode" onclick="toggleDarkMode()" aria-label="Toggle Dark Mode">🌙</button>
-      <div class="hero-title">
-        <img src="/logo.png" alt="Gemini Logo" class="logo" />
-        <h1>AI Coding Mentor</h1>
-      </div>
-      <p class="subtitle">Elevate your code with intelligent insights powered by <strong>Gemini AI</strong>.</p>
-    </header>
+  <div class="app-container">
 
-    <main class="main-content">
-      <form method="POST" action="/" class="form-box">
-        <label for="code">Paste your code:</label>
-        <textarea name="code" id="code" rows="12" placeholder="Enter your code here..."><%= code %></textarea>
-
-        <div class="controls">
-          <div class="select-mode">
-            <label for="mode">Choose Mode:</label>
-            <select name="mode" id="mode">
-              <option value="improve" <%= mode === 'improve' ? 'selected' : '' %>>✨ Improve Code</option>
-              <option value="explain" <%= mode === 'explain' ? 'selected' : '' %>>💡 Explain Code</option>
-              <option value="comment" <%= mode === 'comment' ? 'selected' : '' %>>📝 Inline Comments</option>
-            </select>
-          </div>
-
-          <div class="action-buttons">
-            <button type="submit" id="submit-btn" class="primary-btn">🚀 Get AI Insights</button>
-            <button type="button" onclick="clearForm()" class="secondary-btn">🧹 Clear</button>
-            <button type="button" onclick="speakCode()" class="voice-btn">🎙️ Voice</button>
-          </div>
+    <!-- 1. Sidebar -->
+    <aside class="sidebar">
+      <div class="brand-section">
+        <div class="brand">
+          <img src="/logo.png" alt="AI" class="logo-img"> <!-- Ensure logo.png exists or use text -->
+          <h1>AI.Mentor</h1>
         </div>
-      </form>
+      </div>
 
-      <% if (language || suggestions) { %>
-        <section class="output-section">
-          <% if (language) { %>
-            <p class="detected-lang">🧠 Detected Language: <strong><%= language %></strong></p>
-          <% } %>
+      <nav class="nav-menu">
+        <a href="/app" class="nav-item active">
+          <span>🚀</span> Editor
+        </a>
+        <a href="#" class="nav-item">
+          <span>📚</span> History
+        </a>
+        <a href="#" class="nav-item">
+          <span>🧩</span> Templates
+        </a>
+        <a href="/dashboard" class="nav-item">
+          <span>📊</span> Analytics
+        </a>
+        <a href="#" class="nav-item">
+          <span>⚙️</span> Settings
+        </a>
+      </nav>
 
-          <% if (suggestions) { %>
-            <div class="suggestions-box">
-              <div class="output-header">
-                <h2>🔍 AI Suggestions</h2>
-                <button id="copy-btn" class="copy-btn" aria-label="Copy Suggestions">📋 Copy</button>
+      <div class="sidebar-footer">
+        <div class="nav-item">
+          <span>💎</span> Go Pro
+        </div>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content -->
+    <main class="main-content">
+
+      <!-- Sticky Header -->
+      <header class="top-bar">
+        <div class="project-info">
+          <span style="color:var(--text-secondary);">Project /</span>
+          <span style="font-weight:600; color:var(--text-primary);">Untitled-Snippet</span>
+          <% if(language) { %>
+            <span class="badge">
+              <%= language %>
+            </span>
+            <% } %>
+        </div>
+
+        <div class="top-controls">
+          <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+            🌙
+          </button>
+          <button class="secondary-btn" style="padding: 8px 16px; border-radius: 6px;">Share</button>
+          <div class="profile-avatar" style="width:32px; height:32px; background:#3b82f6; border-radius:50%;"></div>
+        </div>
+      </header>
+
+      <!-- Split Screen Editor -->
+      <div class="editor-layout">
+
+        <!-- Left Panel: Code Input -->
+        <section class="panel left-panel">
+          <form action="/" method="POST" style="display:flex; flex-direction:column; height:100%;">
+            <div class="toolbar">
+              <span class="toolbar-title">Code Input</span>
+
+              <!-- Mode Toggle Buttons -->
+              <div class="mode-toggles">
+                <input type="hidden" name="mode" id="mode-input" value="<%= mode %>">
+
+                <button type="button" class="mode-btn <%= mode === 'improve' ? 'active' : '' %>"
+                  onclick="setMode('improve')">✨ Improve</button>
+                <button type="button" class="mode-btn <%= mode === 'explain' ? 'active' : '' %>"
+                  onclick="setMode('explain')">💡 Explain</button>
+                <button type="button" class="mode-btn <%= mode === 'comment' ? 'active' : '' %>"
+                  onclick="setMode('comment')">📝 Comment</button>
+                <button type="button" class="mode-btn <%= mode === 'debug' ? 'active' : '' %>"
+                  onclick="setMode('debug')">🐞 Debug</button>
               </div>
-              <pre><code id="ai-suggestions" class="language-<%= language.toLowerCase() %>"><%= suggestions %></code></pre>
-              <button onclick="downloadSuggestions()" class="download-btn">⬇️ Download as TXT</button>
             </div>
-          <% } %>
+
+            <div class="editor-container">
+              <textarea name="code" id="code" placeholder="// Paste your code here..."
+                spellcheck="false"><%= code %></textarea>
+
+              <!-- Floating Actions -->
+              <div class="editor-actions">
+                <button type="button" onclick="startVoiceInput()"
+                  class="secondary-btn action-btn voice-btn">🎙️</button>
+                <button type="button" onclick="clearEditor()" class="secondary-btn action-btn">🗑️</button>
+                <button type="submit" class="action-btn">
+                  <span>✨</span> Generate
+                </button>
+              </div>
+            </div>
+          </form>
         </section>
-      <% } %>
 
-      <% if (error) { %>
-        <div class="error-msg" role="alert"><%= error %></div>
-      <% } %>
+        <!-- Right Panel: AI Result -->
+        <section class="panel right-panel">
+          <div class="toolbar">
+            <span class="toolbar-title">AI Insights</span>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <!-- Complexity Badges Container -->
+              <div id="complexity-badges" style="display:flex; gap:8px;"></div>
 
-      <div id="loading" class="loading-spinner hidden">⏳ Loading...</div>
+              <button id="diff-btn" onclick="toggleDiffView()" class="secondary-btn"
+                style="display:none; font-size:0.75rem; padding:4px 8px;">🆚 Diff View</button>
+
+              <% if(suggestions) { %>
+                <button onclick="copyToClipboard()" class="secondary-btn" style="font-size:0.75rem; padding:4px 8px;">📋
+                  Copy</button>
+                <% } %>
+            </div>
+          </div>
+
+          <div class="ai-output" id="ai-output">
+            <% if (error) { %>
+              <div
+                style="color: var(--error); padding: 20px; text-align: center; border: 1px solid var(--error); border-radius: 8px; background: rgba(239, 68, 68, 0.1);">
+                <%= error %>
+              </div>
+              <% } else if (suggestions) { %>
+                <!-- Render Suggestions -->
+                <div class="markdown-content">
+                  <!-- We'll assume the AI returns Markdown-like text. 
+                       For now, we render it as text, but in a future step we should parse Markdown. 
+                       Since the current server just sends text, we wrap it. -->
+                  <pre><code class="language-<%= language ? language.toLowerCase() : 'plaintext' %>"><%= suggestions %></code></pre>
+                </div>
+                <% } else { %>
+                  <!-- Empty State -->
+                  <div class="empty-state">
+                    <div class="empty-icon">🤖</div>
+                    <h3>Ready for your code</h3>
+                    <p>Paste your snippet on the left and select a mode to begin.</p>
+                  </div>
+                  <% } %>
+          </div>
+        </section>
+
+      </div>
     </main>
   </div>
 
-  <script src="/script.js"></script>
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-  <script>hljs.highlightAll();</script>
+  <script src="/script.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const copyBtn = document.getElementById('copy-btn');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          const text = document.getElementById('ai-suggestions').innerText;
-          navigator.clipboard.writeText(text).then(() => {
-            copyBtn.textContent = '✅ Copied!';
-            setTimeout(() => (copyBtn.textContent = '📋 Copy'), 2000);
-          });
-        });
-      }
-    });
+    if (window.hljs) hljs.highlightAll();
   </script>
 </body>
+
 </html>

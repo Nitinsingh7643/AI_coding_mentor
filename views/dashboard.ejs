@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coding Mentor - Analytics Dashboard</title>
+
+    <!-- UI Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/styles.css" rel="stylesheet" />
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Dashboard Specific Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .kpi-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .kpi-value {
+            color: var(--text-primary);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            min-height: 300px;
+        }
+
+        h2 {
+            margin: 0 0 1rem 0;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body class="<%= theme === 'light' ? 'light-mode' : '' %>">
+    <div class="app-container">
+
+        <!-- Sidebar (Reused) -->
+        <aside class="sidebar">
+            <div class="brand-section">
+                <div class="brand">
+                    <img src="/logo.png" alt="AI" class="logo-img">
+                    <h1>AI.Mentor</h1>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="/app" class="nav-item">
+                    <span>🚀</span> Editor
+                </a>
+                <a href="#" class="nav-item">
+                    <span>📚</span> History
+                </a>
+                <a href="#" class="nav-item">
+                    <span>🧩</span> Templates
+                </a>
+                <a href="/dashboard" class="nav-item active">
+                    <span>📊</span> Analytics
+                </a>
+                <a href="#" class="nav-item">
+                    <span>⚙️</span> Settings
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="nav-item">
+                    <span>💎</span> Go Pro
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="project-info">
+                    <span style="font-weight:600; color:var(--text-primary);">Analytics Dashboard</span>
+                </div>
+                <div class="top-controls">
+                    <button class="theme-toggle-btn" onclick="toggleTheme()">🌙</button>
+                    <div class="profile-avatar" style="width:32px; height:32px; background:#3b82f6; border-radius:50%;">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-grid">
+
+                <!-- KPI Cards -->
+                <div class="kpi-card">
+                    <span class="kpi-title">Total Optimizations</span>
+                    <span class="kpi-value">128</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">Bugs Fixed</span>
+                    <span class="kpi-value">42</span>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-title">Hours Saved</span>
+                    <span class="kpi-value">15.5</span>
+                </div>
+
+                <!-- Charts -->
+                <div class="chart-container" style="grid-column: span 2;">
+                    <h2>Language Usage</h2>
+                    <canvas id="languageChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h2>Optimization Types</h2>
+                    <canvas id="optimizationChart"></canvas>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Theme Logic
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            document.querySelector('.theme-toggle-btn').textContent = '☀️';
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            document.querySelector('.theme-toggle-btn').textContent = isLight ? '☀️' : '🌙';
+        }
+
+        // Chart.js Setup
+        const ctxLang = document.getElementById('languageChart').getContext('2d');
+        const languageChart = new Chart(ctxLang, {
+            type: 'bar',
+            data: {
+                labels: ['JavaScript', 'Python', 'Java', 'C++', 'Go'],
+                datasets: [{
+                    label: '# of Snippets',
+                    data: [65, 40, 25, 15, 10],
+                    backgroundColor: [
+                        'rgba(59, 130, 246, 0.6)',
+                        'rgba(16, 185, 129, 0.6)',
+                        'rgba(249, 115, 22, 0.6)',
+                        'rgba(139, 92, 246, 0.6)',
+                        'rgba(236, 72, 153, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(59, 130, 246, 1)',
+                        'rgba(16, 185, 129, 1)',
+                        'rgba(249, 115, 22, 1)',
+                        'rgba(139, 92, 246, 1)',
+                        'rgba(236, 72, 153, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.1)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        const ctxOpt = document.getElementById('optimizationChart').getContext('2d');
+        const optimizationChart = new Chart(ctxOpt, {
+            type: 'doughnut',
+            data: {
+                labels: ['Performance', 'Readability', 'Security', 'Bug Fixes'],
+                datasets: [{
+                    data: [40, 30, 15, 15],
+                    backgroundColor: [
+                        '#3b82f6',
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#9ca3af' } }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
