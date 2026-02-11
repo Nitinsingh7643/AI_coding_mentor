@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshot Placeholder - Main App Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1a202c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .placeholder {
+            background: #2d3748;
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #4a5568;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mode-btn {
+            padding: 0.5rem 1rem;
+            background: #4a5568;
+            color: white;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .editor-section {
+            background: #1a202c;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .editor-header {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .code-area {
+            background: #0d1117;
+            color: #58a6ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            min-height: 200px;
+        }
+
+        .analyze-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .results-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .result-panel {
+            background: #1a202c;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .panel-title {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-content {
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        .complexity-badge {
+            display: inline-block;
+            background: #2d3748;
+            color: #48bb78;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+        }
+
+        .icon {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="placeholder">
+        <div class="header">
+            <h1>🤖 AI Coding Mentor - Main Interface</h1>
+            <div class="mode-selector">
+                <div class="mode-btn active">Improve</div>
+                <div class="mode-btn">Explain</div>
+                <div class="mode-btn">Comment</div>
+                <div class="mode-btn">Debug</div>
+            </div>
+        </div>
+
+        <div class="editor-section">
+            <div class="editor-header">
+                <span>📝 Code Editor</span>
+                <span>Language: JavaScript</span>
+            </div>
+            <div class="code-area">
+                function fibonacci(n) {<br>
+                &nbsp;&nbsp;if (n <= 1) return n;<br>
+                    &nbsp;&nbsp;return fibonacci(n - 1) + fibonacci(n - 2);<br>
+                    }<br>
+                    <br>
+                    console.log(fibonacci(10));
+            </div>
+        </div>
+
+        <button class="analyze-btn">⚡ Analyze Code</button>
+
+        <div class="results-section">
+            <div class="result-panel">
+                <div class="panel-title">
+                    <span class="icon">💡</span>
+                    AI Analysis & Suggestions
+                </div>
+                <div class="panel-content">
+                    Your code analysis will appear here after clicking "Analyze Code".
+                    <br><br>
+                    The AI will provide:
+                    <br>• Detailed code explanation
+                    <br>• Optimization suggestions
+                    <br>• Best practices recommendations
+                    <br>• Performance improvements
+                </div>
+            </div>
+
+            <div class="result-panel">
+                <div class="panel-title">
+                    <span class="icon">✨</span>
+                    Improved Code
+                </div>
+                <div class="panel-content">
+                    The optimized version of your code will be displayed here.
+                    <br><br>
+                    <div class="complexity-badge">⏱️ Time: O(n)</div>
+                    <div class="complexity-badge">💾 Space: O(n)</div>
+                </div>
+            </div>
+
+            <div class="result-panel">
+                <div class="panel-title">
+                    <span class="icon">🔄</span>
+                    Code Diff Viewer
+                </div>
+                <div class="panel-content">
+                    Side-by-side comparison showing:
+                    <br>• <span style="color: #f56565;">Removed lines (red)</span>
+                    <br>• <span style="color: #48bb78;">Added lines (green)</span>
+                    <br>• Unchanged lines
+                </div>
+            </div>
+
+            <div class="result-panel">
+                <div class="panel-title">
+                    <span class="icon">📊</span>
+                    Complexity Analysis
+                </div>
+                <div class="panel-content">
+                    Detailed complexity metrics:
+                    <br>• Time complexity breakdown
+                    <br>• Space complexity analysis
+                    <br>• Performance comparison
+                    <br>• Optimization opportunities
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

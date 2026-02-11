@@ -371,29 +371,121 @@ async function getAIResponse(code, mode) {
 
 ## 📸 Screenshots
 
-### Landing Page
-The home page features a modern, clean design with a hero section and call-to-action button to launch the application.
+> **Note**: To add actual screenshots, please follow the instructions in `screenshots/README.md`
 
-**Features:**
-- Glassmorphism design elements
-- Gradient backgrounds
-- Responsive layout
-- Modern typography
+### 1. Landing Page
+![Home Page](screenshots/home-page.png)
 
-### Main Application Interface
-The main interface includes:
-- **Code Editor**: Syntax-highlighted input area
-- **Mode Selector**: Choose between improve, explain, comment, debug
-- **Results Panel**: AI analysis and suggestions
-- **Diff Viewer**: Side-by-side code comparison
-- **Complexity Metrics**: Time and space complexity display
+**Key Features Shown:**
+- Modern hero section with gradient background
+- "Supercharge Your Coding Skills with AI" headline
+- Statistics: 10,000+ Developers, 25+ Languages, 98% Satisfaction Rate
+- Feature cards grid (Code Refactoring, Explanation, Smart Comments, etc.)
+- Testimonials from developers
+- Pricing plans (Starter, Developer, Team)
+- Contact form and team section
 
-### Dashboard
-Analytics and history tracking:
-- Recent code analyses
-- Language distribution
+---
+
+### 2. Main Application Interface
+![Main App Interface](screenshots/main-interface.png)
+
+**Interface Components:**
+- **Navigation Bar**: Mode selector with Improve/Explain/Comment/Debug options
+- **Code Editor**: Syntax-highlighted textarea with line numbers
+- **Language Detection**: Automatic programming language identification
+- **Analyze Button**: Primary CTA to trigger AI analysis
+- **Results Section**: Initially hidden, appears after analysis
+
+---
+
+### 3. Code Analysis Results
+![Code Analysis Results](screenshots/code-analysis-result.png)
+
+**Results Display:**
+- **AI Analysis Panel**: Markdown-formatted suggestions and explanations
+- **Improved Code Panel**: Optimized version with syntax highlighting
+- **Complexity Metrics**: 
+  - Time Complexity (e.g., O(n log n))
+  - Space Complexity (e.g., O(n))
+- **Diff Viewer**: Side-by-side comparison with:
+  - Green highlighting for added lines
+  - Red highlighting for removed lines
+  - Unchanged lines in default color
+
+---
+
+### 4. Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+**Analytics & Tracking:**
+- Recent code analysis history
+- Language distribution charts
 - Improvement statistics
-- Usage metrics
+- Usage metrics and trends
+- Personal coding insights
+
+---
+
+### 5. Features Section
+![Features Grid](screenshots/features-section.png)
+
+**Six Core Features:**
+1. 🪄 Code Refactoring - Automatic code structure improvement
+2. 📖 Code Explanation - Plain English explanations
+3. 💬 Smart Comments - Auto-generated documentation
+4. 🎤 Voice Coding - Dictate code ideas
+5. 🐛 Debugging Assistant - AI-powered error analysis
+6. 🎓 Learning Paths - Personalized recommendations
+
+---
+
+### 6. Pricing Plans
+![Pricing Section](screenshots/pricing-section.png)
+
+**Three Tiers:**
+- **Starter** ($9/month): 100 sessions, basic features
+- **Developer** ($29/month): Unlimited, all languages, priority support ⭐
+- **Team** ($99/month): Everything + team features, analytics
+
+---
+
+## 📱 Mobile Responsive Views
+
+The application is fully responsive and optimized for mobile devices:
+
+- Mobile-first design approach
+- Touch-friendly interface elements
+- Optimized layouts for tablets and phones
+- Consistent experience across all devices
+
+---
+
+## 🎨 Design Highlights
+
+- **Modern UI**: Glassmorphism effects and gradient backgrounds
+- **Smooth Animations**: Intersection Observer for scroll animations
+- **Accessibility**: Semantic HTML and ARIA labels
+- **Performance**: Optimized images and lazy loading
+- **Dark Theme**: Eye-friendly color scheme for coding
+
+---
+
+## 📷 How to Add Real Screenshots
+
+1. Start the application: `npm start`
+2. Navigate to `http://localhost:3000`
+3. Take screenshots of each section
+4. Save them in the `screenshots/` directory with these names:
+   - `home-page.png`
+   - `main-interface.png`
+   - `code-analysis-result.png`
+   - `dashboard.png`
+   - `features-section.png`
+   - `pricing-section.png`
+5. Screenshots will automatically appear in this README
+
+For detailed instructions, see `screenshots/README.md`
 
 ---
 
