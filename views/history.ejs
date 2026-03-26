@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coding Mentor - History</title>
+    <!-- UI Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/styles.css" rel="stylesheet" />
+    <style>
+        .history-container {
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .history-header h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        .search-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-full);
+            color: var(--text-primary);
+            width: 300px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 3px solid var(--bg-body);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .history-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+        .history-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+        .history-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        .history-meta .badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .history-title {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0 0 1rem 0;
+        }
+        .history-stats {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+        }
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-secondary);
+        }
+        .stat-icon {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body class="<%= theme === 'light' ? 'light-mode' : '' %>">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand-section">
+                <div class="brand">
+                    <img src="/logo.png" alt="AI" class="logo-img">
+                    <h1>AI.Mentor</h1>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="/app" class="nav-item">
+                    <span>🚀</span> Editor
+                </a>
+                <a href="/history" class="nav-item active">
+                    <span>📚</span> History
+                </a>
+                <a href="/templates" class="nav-item">
+                    <span>🧩</span> Templates
+                </a>
+                <a href="/dashboard" class="nav-item">
+                    <span>📊</span> Analytics
+                </a>
+                <a href="/settings" class="nav-item">
+                    <span>⚙️</span> Settings
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="nav-item">
+                    <span>💎</span> Go Pro
+                </div>
+            </div>
+        </aside>
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="project-info">
+                    <span style="font-weight:600; color:var(--text-primary);">Snippet History</span>
+                </div>
+                <div class="top-controls">
+                    <button class="theme-toggle-btn" onclick="toggleTheme()">🌙</button>
+                    <div class="profile-avatar" style="width:32px; height:32px; background:#3b82f6; border-radius:50%;"></div>
+                </div>
+            </header>
+            
+            <div class="history-container">
+                <div class="history-header">
+                    <h2>Recent Activity</h2>
+                    <input type="text" class="search-bar" placeholder="Search snippets, languages, or dates..." />
+                </div>
+                
+                <div class="timeline">
+                    <!-- Placeholder Item 1 -->
+                    <div class="timeline-item">
+                        <div class="history-card">
+                            <div class="history-meta">
+                                <span>Today, 10:45 AM</span>
+                                <span class="badge">JavaScript</span>
+                            </div>
+                            <h3 class="history-title">User Authentication Logic Optimization</h3>
+                            <div class="history-stats">
+                                <div class="stat"><span class="stat-icon">✨</span> Mode: Improve</div>
+                                <div class="stat"><span class="stat-icon">⏱️</span> Time: O(1)</div>
+                                <div class="stat"><span class="stat-icon">🗑️</span> Space: O(1)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder Item 2 -->
+                    <div class="timeline-item">
+                        <div class="history-card">
+                            <div class="history-meta">
+                                <span>Yesterday, 03:20 PM</span>
+                                <span class="badge">Python</span>
+                            </div>
+                            <h3 class="history-title">Data Processing Script Debugging</h3>
+                            <div class="history-stats">
+                                <div class="stat"><span class="stat-icon">🐞</span> Mode: Debug</div>
+                                <div class="stat"><span class="stat-icon">⏱️</span> Time: O(n log n)</div>
+                                <div class="stat"><span class="stat-icon">🗑️</span> Space: O(n)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder Item 3 -->
+                    <div class="timeline-item">
+                        <div class="history-card">
+                            <div class="history-meta">
+                                <span>March 24, 09:15 AM</span>
+                                <span class="badge">React</span>
+                            </div>
+                            <h3 class="history-title">Custom Hook Explanation</h3>
+                            <div class="history-stats">
+                                <div class="stat"><span class="stat-icon">💡</span> Mode: Explain</div>
+                                <div class="stat"><span class="stat-icon">⏱️</span> Time: -</div>
+                                <div class="stat"><span class="stat-icon">🗑️</span> Space: -</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            document.querySelector('.theme-toggle-btn').textContent = '☀️';
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            document.querySelector('.theme-toggle-btn').textContent = isLight ? '☀️' : '🌙';
+        }
+    </script>
+</body>
+</html>

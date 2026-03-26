@@ -48,6 +48,21 @@ app.get('/dashboard', (req, res) => {
   res.render('dashboard', { theme: 'dark' });
 });
 
+// 📚 History Page
+app.get('/history', (req, res) => {
+  res.render('history', { theme: 'dark' });
+});
+
+// 🧩 Templates Page
+app.get('/templates', (req, res) => {
+  res.render('templates', { theme: 'dark' });
+});
+
+// ⚙️ Settings Page
+app.get('/settings', (req, res) => {
+  res.render('settings', { theme: 'dark' });
+});
+
 // 🔁 Form Submission
 app.post('/', async (req, res) => {
   const userCode = req.body.code.trim();

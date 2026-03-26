@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coding Mentor - Settings</title>
+    <!-- UI Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/styles.css" rel="stylesheet" />
+    <style>
+        .settings-wrapper {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .settings-header {
+            margin-bottom: 2rem;
+        }
+        .settings-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin: 0 0 0.5rem 0;
+        }
+        .settings-header p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        .settings-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        .setting-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            max-width: 60%;
+        }
+        .setting-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .setting-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        /* Modern Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--bg-body);
+            border: 1px solid var(--border-color);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--text-secondary);
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        input:checked + .slider:before {
+            transform: translateX(22px);
+            background-color: #fff;
+        }
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--primary-color);
+        }
+
+        /* Modern Select */
+        .modern-select {
+            appearance: none;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.6rem 2.5rem 0.6rem 1rem;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+        }
+        .modern-select:focus {
+            border-color: var(--primary-color);
+        }
+
+        /* Actions */
+        .save-btn {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+        }
+    </style>
+</head>
+<body class="<%= theme === 'light' ? 'light-mode' : '' %>">
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand-section">
+                <div class="brand">
+                    <img src="/logo.png" alt="AI" class="logo-img">
+                    <h1>AI.Mentor</h1>
+                </div>
+            </div>
+            <nav class="nav-menu">
+                <a href="/app" class="nav-item">
+                    <span>🚀</span> Editor
+                </a>
+                <a href="/history" class="nav-item">
+                    <span>📚</span> History
+                </a>
+                <a href="/templates" class="nav-item">
+                    <span>🧩</span> Templates
+                </a>
+                <a href="/dashboard" class="nav-item">
+                    <span>📊</span> Analytics
+                </a>
+                <a href="/settings" class="nav-item active">
+                    <span>⚙️</span> Settings
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="nav-item">
+                    <span>💎</span> Go Pro
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="project-info">
+                    <span style="font-weight:600; color:var(--text-primary);">Preferences</span>
+                </div>
+                <div class="top-controls">
+                    <button class="theme-toggle-btn" onclick="toggleTheme()">🌙</button>
+                    <div class="profile-avatar" style="width:32px; height:32px; background:#3b82f6; border-radius:50%;"></div>
+                </div>
+            </header>
+
+            <div class="settings-wrapper">
+                <div class="settings-header">
+                    <h2>Advanced Settings</h2>
+                    <p>Customize your AI Mentor experience and preferences.</p>
+                </div>
+
+                <!-- Group 1: AI Behavior -->
+                <h3 style="color:var(--text-primary); font-size:1.1rem; margin-bottom:1rem;">🤖 AI Behavior</h3>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Mentor Persona</span>
+                            <span class="setting-desc">Choose how the AI communicates. Strict mentor focuses on best practices and algorithms; Optimistic focuses on motivation and easy wins.</span>
+                        </div>
+                        <select class="modern-select">
+                            <option>Balanced (Default)</option>
+                            <option>Strict Teacher</option>
+                            <option>Optimistic Helper</option>
+                            <option>Academic Researcher</option>
+                        </select>
+                    </div>
+                    <div class="settings-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Auto-Generate Complexity</span>
+                            <span class="setting-desc">Always attach Big-O Time & Space complexity metrics to every optimization or explanation.</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Advanced Diff Viewer</span>
+                            <span class="setting-desc">Enable side-by-side comparison visualization after the AI generates improved code.</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Group 2: Editor Preferences -->
+                <h3 style="color:var(--text-primary); font-size:1.1rem; margin-bottom:1rem; margin-top:2.5rem;">💻 Editor Preferences</h3>
+                <div class="settings-group">
+                    <div class="settings-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Syntax Highlighting Theme</span>
+                            <span class="setting-desc">Select the default color palette used for code snippet visualization.</span>
+                        </div>
+                        <select class="modern-select">
+                            <option>Atom One Dark</option>
+                            <option>Dracula</option>
+                            <option>GitHub Dark</option>
+                            <option>Monokai Pro</option>
+                        </select>
+                    </div>
+                    <div class="settings-item">
+                        <div class="setting-info">
+                            <span class="setting-title">Live Auto-Save</span>
+                            <span class="setting-desc">Automatically save editor content locally so you never lose your progress during a tab reload.</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div style="text-align: right; margin-top: 2rem;">
+                    <button class="save-btn" onclick="alert('Settings configured successfully!')">Save Preferences</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-mode');
+            document.querySelector('.theme-toggle-btn').textContent = '☀️';
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            document.querySelector('.theme-toggle-btn').textContent = isLight ? '☀️' : '🌙';
+        }
+    </script>
+</body>
+</html>
