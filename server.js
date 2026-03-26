@@ -45,7 +45,7 @@ app.get('/app', (req, res) => {
 
 // 📊 Dashboard Page
 app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
+  res.render('dashboard', { theme: 'dark' });
 });
 
 // 🔁 Form Submission
@@ -157,6 +157,10 @@ async function getAIResponse(code, mode) {
   }
 }
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
